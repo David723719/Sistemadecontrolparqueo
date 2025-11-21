@@ -4,19 +4,16 @@ using Sistemadecontrolparqueo.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// 🔑 Obtener y parsear MYSQL_URL (Railway) o usar appsettings (local)
+// 🔑 Configurar cadena de conexión (Railway/Heroku: MYSQL_URL; Local: appsettings)
 string connectionString = GetMySqlConnection(builder.Configuration);
 
-// Registrar DbContext
 builder.Services.AddDbContext<ParqueoContext>(options =>
-    options.UseMySql(connectionString, ServerVersion.Parse("8.0.32-mysql"))); // versión fija para evitar advertencias
+    options.UseMySql(connectionString, ServerVersion.Parse("8.0.32-mysql")));
 
-// Servicios MVC
 builder.Services.AddControllersWithViews();
 
 var app = builder.Build();
 
-// Pipeline HTTP
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Home/Error");
@@ -32,7 +29,7 @@ app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Vehiculo}/{action=Index}/{id?}");
 
-// 🧠 Aplicar migraciones automáticamente al iniciar (solo en producción)
+// 🧠 Aplicar migraciones en producción
 if (app.Environment.IsProduction())
 {
     using var scope = app.Services.CreateScope();
@@ -40,31 +37,31 @@ if (app.Environment.IsProduction())
     context.Database.Migrate();
 }
 
+// ✅ Soporte para Heroku: puerto dinámico (y Railway)
+var port = Environment.GetEnvironmentVariable("PORT") ?? "5000";
+app.Urls.Add($"http://0.0.0.0:{port}");
+
 app.Run();
 
-// 🔐 Método auxiliar: obtiene conexión para MySQL (Railway o local)
+// 🔐 Método auxiliar: obtiene conexión para MySQL
 static string GetMySqlConnection(IConfiguration configuration)
 {
-    var mysqlUrl = Environment.GetEnvironmentVariable("MYSQL_URL");
-    
-    if (!string.IsNullOrEmpty(mysqlUrl))
+    // Heroku: usa CLEARDB_DATABASE_URL (si usas ClearDB)
+    var dbUrl = Environment.GetEnvironmentVariable("CLEARDB_DATABASE_URL")
+                ?? Environment.GetEnvironmentVariable("MYSQL_URL");
+
+    if (!string.IsNullOrEmpty(dbUrl))
     {
-        // Parsear URL de Railway/MySQL
-        var uri = new Uri(mysqlUrl);
+        var uri = new Uri(dbUrl);
         var user = uri.UserInfo.Split(':')[0];
         var password = Uri.UnescapeDataString(uri.UserInfo.Split(':')[1]);
         var host = uri.Host;
         var port = uri.Port;
         var database = uri.LocalPath.Trim('/');
 
-        // SSL obligatorio en Railway
         return $"Server={host};Port={port};Database={database};User={user};Password={password};SslMode=Required;Connection Timeout=30;";
     }
 
-    // Desarrollo local
-    var localConn = configuration.GetConnectionString("ParqueoDB");
-    if (string.IsNullOrEmpty(localConn))
-        throw new InvalidOperationException("No se encontró cadena de conexión (ni MYSQL_URL ni ParqueoDB).");
-
-    return localConn;
+    return configuration.GetConnectionString("ParqueoDB") 
+           ?? throw new InvalidOperationException("No se encontró cadena de conexión.");
 }
