@@ -9,15 +9,15 @@ var builder = WebApplication.CreateBuilder(args);
 string connectionString = GetConnectionString(builder.Configuration);
 LogConnectionString(connectionString);
 
-// Registrar DbContext con configuración robusta para MySQL
+// Registrar DbContext
 builder.Services.AddDbContext<ParqueoContext>(options =>
     options.UseMySql(
         connectionString,
         ServerVersion.AutoDetect(connectionString),
         mySqlOptions =>
         {
-            mySqlOptions.CommandTimeout(120); // 2 minutos para migraciones grandes
-            mySqlOptions.EnableRetryOnFailure(3); // Reintentos automáticos en errores transitorios
+            mySqlOptions.CommandTimeout(120);
+            mySqlOptions.EnableRetryOnFailure(3);
         }
     ));
 
@@ -25,7 +25,7 @@ builder.Services.AddControllersWithViews();
 
 var app = builder.Build();
 
-// Pipeline de solicitudes
+// Pipeline HTTP
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Home/Error");
@@ -41,65 +41,44 @@ app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Vehiculo}/{action=Index}/{id?}");
 
-// 🌐 Configurar puerto dinámico (obligatorio en Railway)
+// 🌐 Puerto dinámico (Railway lo requiere)
 var port = Environment.GetEnvironmentVariable("PORT") ?? "8080";
 app.Urls.Clear();
 app.Urls.Add($"http://0.0.0.0:{port}");
 Console.WriteLine($"🌐 Escuchando en http://0.0.0.0:{port}");
 
-// 🔄 Aplicar migraciones con reintentos (solo en producción)
+// 🔒 APLICAR MIGRACIONES ANTES DE INICIAR (solo en producción)
+// Esto evita que el health check falle por tablas inexistentes
 if (app.Environment.IsProduction())
 {
-    _ = Task.Run(async () =>
+    Console.WriteLine("⏳ [Producción] Aplicando migraciones antes de iniciar...");
+    try
     {
-        const int maxRetries = 3;
-        for (int attempt = 1; attempt <= maxRetries; attempt++)
+        using var scope = app.Services.CreateScope();
+        var context = scope.ServiceProvider.GetRequiredService<ParqueoContext>();
+
+        Console.WriteLine("📡 Probando conexión a la base de datos...");
+        await context.Database.OpenConnectionAsync();
+        await context.Database.CloseConnectionAsync();
+        Console.WriteLine("✅ Conexión exitosa.");
+
+        Console.WriteLine("🚀 Aplicando migraciones...");
+        var cts = new CancellationTokenSource(TimeSpan.FromMinutes(2));
+        await context.Database.MigrateAsync(cts.Token);
+        Console.WriteLine("✅ Migraciones aplicadas correctamente.");
+    }
+    catch (Exception ex)
+    {
+        var errorMsg = ex switch
         {
-            try
-            {
-                // Espera progresiva: 3s → 6s → 9s
-                var delay = TimeSpan.FromSeconds(3 * attempt);
-                Console.WriteLine($"⏳ Intento {attempt}/{maxRetries}: Esperando {delay.TotalSeconds}s para estabilidad de DB...");
-                await Task.Delay(delay);
-
-                using var scope = app.Services.CreateScope();
-                var context = scope.ServiceProvider.GetRequiredService<ParqueoContext>();
-
-                // ✅ Prueba real de conexión (no solo ping)
-                Console.WriteLine("📡 Verificando conexión a la base de datos...");
-                await context.Database.OpenConnectionAsync();
-                await context.Database.CloseConnectionAsync();
-                Console.WriteLine("✅ Conexión exitosa.");
-
-                // 🚀 Aplicar migraciones
-                Console.WriteLine("🔄 Aplicando migraciones...");
-                await context.Database.MigrateAsync();
-                Console.WriteLine("✅ Migraciones aplicadas correctamente.");
-
-                // 💡 Opcional: Sembrar datos iniciales si es la primera vez
-                // await SeedInitialData(context);
-
-                return;
-            }
-            catch (Exception ex)
-            {
-                string errorMsg = ex switch
-                {
-                    MySqlException mySqlEx => $"MySQL [{mySqlEx.Number}]: {mySqlEx.Message}",
-                    InvalidOperationException => "Configuración inválida o DB no disponible",
-                    _ => ex.Message
-                };
-
-                Console.WriteLine($"❌ Falló intento {attempt}: {errorMsg}");
-
-                if (attempt == maxRetries)
-                {
-                    Console.WriteLine("💀 Error crítico: No se pudieron aplicar migraciones. La aplicación no puede continuar.");
-                    Environment.Exit(1); // Falla el contenedor (Railway lo reiniciará o marcará como fallido)
-                }
-            }
-        }
-    });
+            MySqlException mySqlEx => $"MySQL [{mySqlEx.Number}]: {mySqlEx.Message}",
+            OperationCanceledException => "Timeout: migraciones tardaron más de 2 minutos",
+            _ => ex.Message
+        };
+        Console.WriteLine($"❌ ERROR CRÍTICO: No se pudieron aplicar migraciones.\n{errorMsg}");
+        Console.WriteLine("💀 La aplicación no puede iniciar. Despliegue fallido.");
+        throw; // Esto hace que el contenedor se caiga → Railway lo marca como fallido (mejor que 500 silencioso)
+    }
 }
 
 app.Run();
@@ -123,8 +102,7 @@ static string GetConnectionString(IConfiguration config)
             var port = uri.Port;
             var db = uri.LocalPath.Trim('/');
 
-            // ✅ Usamos SslMode=Required (Railway lo exige)
-            return $"Server={host};Port={port};Database={db};User={user};Password={pass};SslMode=Required;Connection Timeout=30;Command Timeout=120;";
+            return $"Server={host};Port={port};Database={db};User={user};Password={pass};SslMode=Required;Connection Timeout=30;";
         }
         catch (Exception ex)
         {
@@ -132,38 +110,29 @@ static string GetConnectionString(IConfiguration config)
         }
     }
 
-    // Caer a appsettings.json (solo desarrollo local)
-    var fallback = config.GetConnectionString("ParqueoDB");
-    if (string.IsNullOrWhiteSpace(fallback))
-        throw new InvalidOperationException("❌ No se encontró MYSQL_URL ni ConnectionStrings:ParqueoDB");
+    // Fallback: desarrollo local
+    var localConn = config.GetConnectionString("ParqueoDB");
+    if (string.IsNullOrWhiteSpace(localConn))
+        throw new InvalidOperationException("❌ No hay cadena de conexión (ni MYSQL_URL ni ParqueoDB)");
 
-    Console.WriteLine("🔧 Modo desarrollo: usando conexión local.");
-    return fallback;
+    Console.WriteLine("🔧 Modo desarrollo: usando appsettings.json");
+    return localConn;
 }
 
 static void LogConnectionString(string conn)
 {
     try
     {
-        var parts = System.Text.RegularExpressions.Regex.Matches(conn, @"(\w+)=([^;]+)")
-            .ToDictionary(m => m.Groups[1].Value, m => m.Groups[2].Value);
-
-        var server = parts.GetValueOrDefault("Server") ?? "desconocido";
-        var db = parts.GetValueOrDefault("Database") ?? "desconocido";
-        var user = parts.GetValueOrDefault("User") ?? "desconocido";
-
-        // Ocultar contraseña en logs
-        var safeConn = conn;
-        if (parts.TryGetValue("Password", out var pass) && !string.IsNullOrEmpty(pass))
-        {
-            safeConn = safeConn.Replace(pass, "***");
-        }
-
+        var server = ExtractValue(conn, "Server");
+        var db = ExtractValue(conn, "Database");
+        var user = ExtractValue(conn, "User");
         Console.WriteLine($"🔍 Conexión: Server={server}, Database={db}, User={user}");
-        Console.WriteLine($"🔒 Cadena (segura): {safeConn}");
     }
-    catch
-    {
-        Console.WriteLine("⚠️ No se pudo analizar la cadena de conexión.");
-    }
+    catch { }
+}
+
+static string ExtractValue(string conn, string key)
+{
+    var match = System.Text.RegularExpressions.Regex.Match(conn, $@"{key}=([^;]+)");
+    return match.Success ? match.Groups[1].Value : "??";
 }

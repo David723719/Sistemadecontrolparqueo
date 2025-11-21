@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Sistemadecontrolparqueo")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+30c41422a9dc8db7fd938a212009ec0559771920")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+25a22475c222ed63dfd77f5ec728a561a2178e8c")]
 [assembly: System.Reflection.AssemblyProductAttribute("Sistemadecontrolparqueo")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Sistemadecontrolparqueo")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
