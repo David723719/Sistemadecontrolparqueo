@@ -220,4 +220,4 @@ D:\Sistemadecontrolparqueo\obj\Debug\net8.0\Sistemadecontrolparqueo.pdb
 D:\Sistemadecontrolparqueo\obj\Debug\net8.0\Sistemadecontrolparqueo.genruntimeconfig.cache
 D:\Sistemadecontrolparqueo\obj\Debug\net8.0\ref\Sistemadecontrolparqueo.dll
 D:\Sistemadecontrolparqueo\obj\Debug\net8.0\Sistemadecontrolparqueo.sourcelink.json
-D:\Sistemadecontrolparqueo\bin\Debug\net8.0\appsettings.Production.json
+D:\Sistemadecontrolparqueo\bin\Debug\net8.0\railway.json

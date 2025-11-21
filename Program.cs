@@ -4,7 +4,7 @@ using Sistemadecontrolparqueo.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// 🔑 Conexión: Railway inyecta MYSQL_URL
+// 🔑 Obtener cadena de conexión (Railway inyecta MYSQL_URL)
 string connectionString;
 var mysqlUrl = Environment.GetEnvironmentVariable("MYSQL_URL");
 
@@ -17,13 +17,13 @@ if (!string.IsNullOrEmpty(mysqlUrl))
     var port = uri.Port;
     var database = uri.LocalPath.Trim('/');
 
-    connectionString = $"Server={host};Port={port};Database={database};User={user};Password={password};SslMode=Required;";
+    connectionString = $"Server={host};Port={port};Database={database};User={user};Password={password};SslMode=Required;Connection Timeout=30;";
 }
 else
 {
     // Desarrollo local
-    connectionString = builder.Configuration.GetConnectionString("ParqueoDB") 
-                       ?? throw new InvalidOperationException("No hay cadena de conexión.");
+    connectionString = builder.Configuration.GetConnectionString("ParqueoDB")
+                       ?? throw new InvalidOperationException("No se encontró cadena de conexión.");
 }
 
 // Registrar DbContext
@@ -49,12 +49,28 @@ app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Vehiculo}/{action=Index}/{id?}");
 
-// 🧠 Ejecutar migraciones al iniciar (solo en producción)
+// ✅ Puerto dinámico para Railway/Heroku
+var port = Environment.GetEnvironmentVariable("PORT") ?? "80";
+app.Urls.Add($"http://0.0.0.0:{port}");
+
+// ✅ Migraciones en segundo plano (no bloquean el healthcheck)
 if (app.Environment.IsProduction())
 {
-    using var scope = app.Services.CreateScope();
-    var context = scope.ServiceProvider.GetRequiredService<ParqueoContext>();
-    context.Database.Migrate();
+    _ = Task.Run(async () =>
+    {
+        try
+        {
+            await Task.Delay(2000); // Espera 2s para que la app esté online
+            using var scope = app.Services.CreateScope();
+            var context = scope.ServiceProvider.GetRequiredService<ParqueoContext>();
+            await context.Database.MigrateAsync();
+            Console.WriteLine("✅ Migraciones aplicadas.");
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"❌ Error en migraciones: {ex.Message}");
+        }
+    });
 }
 
 app.Run();
