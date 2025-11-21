@@ -1,20 +1,22 @@
-# Dockerfile
-FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS base
-WORKDIR /app
-EXPOSE 80
-
+# Etapa de compilación
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 WORKDIR /src
-COPY ["Sistemadecontrolparqueo.csproj", "./"]
-RUN dotnet restore "./Sistemadecontrolparqueo.csproj"
+
+# Copiar solución y .csproj para restore eficiente
+COPY *.sln .
+COPY Sistemadecontrolparqueo/*.csproj ./Sistemadecontrolparqueo/
+RUN dotnet restore
+
+# Copiar todo el código fuente
 COPY . .
-WORKDIR "/src/."
-RUN dotnet build "Sistemadecontrolparqueo.csproj" -c Release -o /app/build
 
-FROM build AS publish
-RUN dotnet publish "Sistemadecontrolparqueo.csproj" -c Release -o /app/publish
+# Compilar y publicar
+WORKDIR /src/Sistemadecontrolparqueo
+RUN dotnet publish -c Release -o /app/publish --no-restore
 
-FROM base AS final
+# Etapa de ejecución (más ligera)
+FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS final
 WORKDIR /app
-COPY --from=publish /app/publish .
+COPY --from=build /app/publish .
+EXPOSE 80
 ENTRYPOINT ["dotnet", "Sistemadecontrolparqueo.dll"]

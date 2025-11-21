@@ -1,0 +1,18 @@
+# Binarios y objetos
+bin/
+obj/
+*.user
+*.suo
+*.userprefs
+
+# Configuración local
+appsettings.Development.json
+appsettings.Local.json
+secrets.json
+
+# VS
+.vs/
+.vscode/
+
+# Logs
+*.log

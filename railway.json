@@ -1,0 +1,10 @@
+{
+    "build": {
+      "builder": "DOCKERFILE"
+    },
+    "deploy": {
+      "startCommand": "dotnet Sistemadecontrolparqueo.dll",
+      "healthcheckPath": "/",
+      "healthcheckTimeout": 100
+    }
+  }
