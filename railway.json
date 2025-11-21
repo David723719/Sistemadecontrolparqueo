@@ -3,8 +3,8 @@
       "builder": "DOCKERFILE"
     },
     "deploy": {
-      "startCommand": "dotnet Sistemadecontrolparqueo.dll",
+      "startCommand": "dotnet out/Sistemadecontrolparqueo.dll",
       "healthcheckPath": "/",
-      "healthcheckTimeout": 100
+      "healthcheckTimeout": 60
     }
   }
