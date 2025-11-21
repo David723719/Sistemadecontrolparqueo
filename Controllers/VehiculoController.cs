@@ -2,22 +2,44 @@
 using Sistemadecontrolparqueo.Data;
 using Sistemadecontrolparqueo.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 
 namespace Sistemadecontrolparqueo.Controllers
 {
     public class VehiculoController : Controller
     {
         private readonly ParqueoContext _context;
+        private readonly ILogger<VehiculoController> _logger;
 
-        public VehiculoController(ParqueoContext context)
+        public VehiculoController(ParqueoContext context, ILogger<VehiculoController> logger)
         {
             _context = context;
+            _logger = logger;
         }
 
         public async Task<IActionResult> Index()
         {
-            var vehiculos = await _context.Vehiculos.ToListAsync();
-            return View(vehiculos);
+            try
+            {
+                // Verificar si la base de datos está disponible
+                if (!await _context.Database.CanConnectAsync())
+                {
+                    // Si no puede conectar, intentar crear la base de datos
+                    await _context.Database.EnsureCreatedAsync();
+                }
+                
+                var vehiculos = await _context.Vehiculos.ToListAsync();
+                return View(vehiculos);
+            }
+            catch (Exception ex)
+            {
+                // Log del error
+                _logger.LogError(ex, "Error al acceder a la base de datos en Index");
+                
+                // Retornar una lista vacía en lugar de lanzar excepción
+                // Esto permite que la aplicación funcione aunque la BD tenga problemas
+                return View(new List<Vehiculo>());
+            }
         }
 
         public IActionResult Entrada()
@@ -94,10 +116,19 @@ namespace Sistemadecontrolparqueo.Controllers
 
         public async Task<IActionResult> Historial()
         {
-            var historial = await _context.Vehiculos
-                .OrderByDescending(v => v.FechaEntrada)
-                .ToListAsync();
-            return View(historial);
+            try
+            {
+                var historial = await _context.Vehiculos
+                    .OrderByDescending(v => v.FechaEntrada)
+                    .ToListAsync();
+                return View(historial);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error al acceder al historial");
+                // Retornar lista vacía en lugar de error
+                return View(new List<Vehiculo>());
+            }
         }
     }
 }

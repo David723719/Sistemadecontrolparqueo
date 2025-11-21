@@ -1,0 +1,47 @@
+@model ErrorViewModel
+@{
+    ViewData["Title"] = "Error";
+}
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow">
+                <div class="card-header bg-danger text-white">
+                    <h1 class="card-title mb-0">
+                        <i class="fas fa-exclamation-triangle me-2"></i>Error
+                    </h1>
+                </div>
+                <div class="card-body">
+                    <h2 class="text-danger">Ocurrió un error al procesar su solicitud.</h2>
+                    
+                    @if (Model.ShowRequestId)
+                    {
+                        <p class="mt-3">
+                            <strong>Request ID:</strong> <code>@Model.RequestId</code>
+                        </p>
+                    }
+
+                    <div class="alert alert-info mt-4">
+                        <h5><i class="fas fa-info-circle me-2"></i>Información</h5>
+                        <p class="mb-0">
+                            Si este error persiste, verifique:
+                        </p>
+                        <ul class="mb-0 mt-2">
+                            <li>La configuración de la base de datos en appsettings.json</li>
+                            <li>Que la base de datos esté accesible</li>
+                            <li>Que las migraciones se hayan aplicado correctamente</li>
+                        </ul>
+                    </div>
+
+                    <div class="mt-4">
+                        <a asp-controller="Vehiculo" asp-action="Index" class="btn btn-primary">
+                            <i class="fas fa-home me-2"></i>Volver al Inicio
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

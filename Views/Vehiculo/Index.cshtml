@@ -2,6 +2,7 @@
 
 @{
     ViewData["Title"] = "Estado del Parqueo";
+    var vehiculos = Model ?? new List<Sistemadecontrolparqueo.Models.Vehiculo>();
 }
 
 <div class="d-flex justify-content-between align-items-center mb-4">
@@ -35,7 +36,7 @@
         <div class="card bg-success text-white">
             <div class="card-body">
                 <h5>En Parqueo</h5>
-                <h3>@Model.Count(v => v.Estado == "Dentro del Parqueo")</h3>
+                <h3>@vehiculos.Count(v => v.Estado == "Dentro del Parqueo")</h3>
             </div>
         </div>
     </div>
@@ -43,7 +44,7 @@
         <div class="card bg-danger text-white">
             <div class="card-body">
                 <h5>Fuera del Parqueo</h5>
-                <h3>@Model.Count(v => v.Estado == "Fuera del Parqueo")</h3>
+                <h3>@vehiculos.Count(v => v.Estado == "Fuera del Parqueo")</h3>
             </div>
         </div>
     </div>
@@ -51,7 +52,7 @@
         <div class="card bg-warning text-dark">
             <div class="card-body">
                 <h5>Recompensas Hoy</h5>
-                <h3>@Model.Count(v => v.RecompensaEntregada && v.FechaSalida?.Date == DateTime.Today)</h3>
+                <h3>@vehiculos.Count(v => v.RecompensaEntregada && v.FechaSalida?.Date == DateTime.Today)</h3>
             </div>
         </div>
     </div>
@@ -59,7 +60,7 @@
         <div class="card bg-primary text-white">
             <div class="card-body">
                 <h5>Total Vehículos</h5>
-                <h3>@Model.Count</h3>
+                <h3>@vehiculos.Count</h3>
             </div>
         </div>
     </div>
@@ -84,44 +85,57 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach (var item in Model)
+                    @if (vehiculos.Any())
                     {
-                        <tr class="@(item.Estado == "Dentro del Parqueo" ? "table-warning" : "")">
-                            <td><strong>@item.Placa</strong></td>
-                            <td>@item.FechaEntrada.ToString("HH:mm dd/MM/yyyy")</td>
-                            <td>@(item.FechaSalida?.ToString("HH:mm dd/MM/yyyy") ?? "N/A")</td>
-                            <td>
-                                <span class="badge @(item.Estado == "Dentro del Parqueo" ? "bg-warning text-dark" : "bg-success")">
-                                    @item.Estado
-                                </span>
-                            </td>
-                            <td>
-                                @if (item.FechaSalida.HasValue)
-                                {
-                                    var tiempo = item.FechaSalida.Value - item.FechaEntrada;
-                                    var horas = (int)tiempo.TotalHours;
-                                    var minutos = (int)(tiempo.TotalMinutes % 60);
-                                    @($"{horas}h {minutos}m")
-                                }
-                                else
-                                {
-                                    <span class="text-muted">N/A</span>
-                                }
-                            </td>
-                            <td>
-                                @(item.RecompensaEntregada ? "🎁" : "❌")
-                            </td>
-                            <td>
-                                @if (item.Estado == "Dentro del Parqueo")
-                                {
-                                    <a asp-action="Salida" asp-route-placa="@item.Placa" class="btn btn-danger btn-sm">
-                                        <i class="fas fa-sign-out-alt"></i> Salida
-                                    </a>
-                                }
-                                else
-                                {
-                                    <span class="text-muted">✅</span>
-                                }
+                        @foreach (var item in vehiculos)
+                        {
+                            <tr class="@(item.Estado == "Dentro del Parqueo" ? "table-warning" : "")">
+                                <td><strong>@item.Placa</strong></td>
+                                <td>@item.FechaEntrada.ToString("HH:mm dd/MM/yyyy")</td>
+                                <td>@(item.FechaSalida?.ToString("HH:mm dd/MM/yyyy") ?? "N/A")</td>
+                                <td>
+                                    <span class="badge @(item.Estado == "Dentro del Parqueo" ? "bg-warning text-dark" : "bg-success")">
+                                        @item.Estado
+                                    </span>
+                                </td>
+                                <td>
+                                    @if (item.FechaSalida.HasValue)
+                                    {
+                                        var tiempo = item.FechaSalida.Value - item.FechaEntrada;
+                                        var horas = (int)tiempo.TotalHours;
+                                        var minutos = (int)(tiempo.TotalMinutes % 60);
+                                        @($"{horas}h {minutos}m")
+                                    }
+                                    else
+                                    {
+                                        <span class="text-muted">N/A</span>
+                                    }
+                                </td>
+                                <td>
+                                    @(item.RecompensaEntregada ? "🎁" : "❌")
+                                </td>
+                                <td>
+                                    @if (item.Estado == "Dentro del Parqueo")
+                                    {
+                                        <a asp-action="Salida" asp-route-placa="@item.Placa" class="btn btn-danger btn-sm">
+                                            <i class="fas fa-sign-out-alt"></i> Salida
+                                        </a>
+                                    }
+                                    else
+                                    {
+                                        <span class="text-muted">✅</span>
+                                    }
+                                </td>
+                            </tr>
+                        }
+                    }
+                    else
+                    {
+                        <tr>
+                            <td colspan="7" class="text-center text-muted py-4">
+                                <i class="fas fa-inbox fa-2x mb-2 d-block"></i>
+                                <p class="mb-0">No hay vehículos registrados aún.</p>
+                                <p class="mb-0"><small>Registra una entrada para comenzar.</small></p>
                             </td>
                         </tr>
                     }
