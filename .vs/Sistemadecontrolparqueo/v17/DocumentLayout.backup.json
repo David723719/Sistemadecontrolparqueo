@@ -1,0 +1,299 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "E:\\DAVID\\Sistemadecontrolparqueo\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{4D71AB33-605B-401C-AA8B-E4556D34625B}|Sistemadecontrolparqueo.csproj|e:\\david\\sistemadecontrolparqueo\\views\\vehiculo\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{4D71AB33-605B-401C-AA8B-E4556D34625B}|Sistemadecontrolparqueo.csproj|solutionrelative:views\\vehiculo\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4D71AB33-605B-401C-AA8B-E4556D34625B}|Sistemadecontrolparqueo.csproj|e:\\david\\sistemadecontrolparqueo\\views\\vehiculo\\index.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4D71AB33-605B-401C-AA8B-E4556D34625B}|Sistemadecontrolparqueo.csproj|solutionrelative:views\\vehiculo\\index.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4D71AB33-605B-401C-AA8B-E4556D34625B}|Sistemadecontrolparqueo.csproj|e:\\david\\sistemadecontrolparqueo\\controllers\\vehiculocontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4D71AB33-605B-401C-AA8B-E4556D34625B}|Sistemadecontrolparqueo.csproj|solutionrelative:controllers\\vehiculocontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4D71AB33-605B-401C-AA8B-E4556D34625B}|Sistemadecontrolparqueo.csproj|e:\\david\\sistemadecontrolparqueo\\wwwroot\\css\\site.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
+      "RelativeMoniker": "D:0:0:{4D71AB33-605B-401C-AA8B-E4556D34625B}|Sistemadecontrolparqueo.csproj|solutionrelative:wwwroot\\css\\site.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4D71AB33-605B-401C-AA8B-E4556D34625B}|Sistemadecontrolparqueo.csproj|e:\\david\\sistemadecontrolparqueo\\views\\vehiculo\\historial.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{4D71AB33-605B-401C-AA8B-E4556D34625B}|Sistemadecontrolparqueo.csproj|solutionrelative:views\\vehiculo\\historial.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4D71AB33-605B-401C-AA8B-E4556D34625B}|Sistemadecontrolparqueo.csproj|e:\\david\\sistemadecontrolparqueo\\views\\vehiculo\\salida.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{4D71AB33-605B-401C-AA8B-E4556D34625B}|Sistemadecontrolparqueo.csproj|solutionrelative:views\\vehiculo\\salida.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4D71AB33-605B-401C-AA8B-E4556D34625B}|Sistemadecontrolparqueo.csproj|e:\\david\\sistemadecontrolparqueo\\views\\vehiculo\\entrada.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{4D71AB33-605B-401C-AA8B-E4556D34625B}|Sistemadecontrolparqueo.csproj|solutionrelative:views\\vehiculo\\entrada.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4D71AB33-605B-401C-AA8B-E4556D34625B}|Sistemadecontrolparqueo.csproj|e:\\david\\sistemadecontrolparqueo\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{4D71AB33-605B-401C-AA8B-E4556D34625B}|Sistemadecontrolparqueo.csproj|solutionrelative:views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4D71AB33-605B-401C-AA8B-E4556D34625B}|Sistemadecontrolparqueo.csproj|e:\\david\\sistemadecontrolparqueo\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{4D71AB33-605B-401C-AA8B-E4556D34625B}|Sistemadecontrolparqueo.csproj|solutionrelative:appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4D71AB33-605B-401C-AA8B-E4556D34625B}|Sistemadecontrolparqueo.csproj|e:\\david\\sistemadecontrolparqueo\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4D71AB33-605B-401C-AA8B-E4556D34625B}|Sistemadecontrolparqueo.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4D71AB33-605B-401C-AA8B-E4556D34625B}|Sistemadecontrolparqueo.csproj|e:\\david\\sistemadecontrolparqueo\\data\\parqueocontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4D71AB33-605B-401C-AA8B-E4556D34625B}|Sistemadecontrolparqueo.csproj|solutionrelative:data\\parqueocontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4D71AB33-605B-401C-AA8B-E4556D34625B}|Sistemadecontrolparqueo.csproj|e:\\david\\sistemadecontrolparqueo\\models\\vehiculo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4D71AB33-605B-401C-AA8B-E4556D34625B}|Sistemadecontrolparqueo.csproj|solutionrelative:models\\vehiculo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4D71AB33-605B-401C-AA8B-E4556D34625B}|Sistemadecontrolparqueo.csproj|e:\\david\\sistemadecontrolparqueo\\sistemadecontrolparqueo.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{4D71AB33-605B-401C-AA8B-E4556D34625B}|Sistemadecontrolparqueo.csproj|solutionrelative:sistemadecontrolparqueo.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4D71AB33-605B-401C-AA8B-E4556D34625B}|Sistemadecontrolparqueo.csproj|e:\\david\\sistemadecontrolparqueo\\views\\_viewimports.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{4D71AB33-605B-401C-AA8B-E4556D34625B}|Sistemadecontrolparqueo.csproj|solutionrelative:views\\_viewimports.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4D71AB33-605B-401C-AA8B-E4556D34625B}|Sistemadecontrolparqueo.csproj|e:\\david\\sistemadecontrolparqueo\\views\\_viewstart.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{4D71AB33-605B-401C-AA8B-E4556D34625B}|Sistemadecontrolparqueo.csproj|solutionrelative:views\\_viewstart.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 14,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{56df62a4-05a3-4e5b-aa1a-99371ccfb997}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{b1e99781-ab81-11d0-b683-00aa00a3ee26}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{1c64b9c2-e352-428e-a56d-0ace190b99a6}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{34e76e81-ee4a-11d0-ae2e-00a0c90fffc3}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{d78612c7-9962-4b83-95d9-268046dad23a}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Index.cshtml.cs",
+              "DocumentMoniker": "E:\\DAVID\\Sistemadecontrolparqueo\\Views\\Vehiculo\\Index.cshtml.cs",
+              "RelativeDocumentMoniker": "Views\\Vehiculo\\Index.cshtml.cs",
+              "ToolTip": "E:\\DAVID\\Sistemadecontrolparqueo\\Views\\Vehiculo\\Index.cshtml.cs",
+              "RelativeToolTip": "Views\\Vehiculo\\Index.cshtml.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAqwAwAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-21T13:52:11.756Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Historial.cshtml",
+              "DocumentMoniker": "E:\\DAVID\\Sistemadecontrolparqueo\\Views\\Vehiculo\\Historial.cshtml",
+              "RelativeDocumentMoniker": "Views\\Vehiculo\\Historial.cshtml",
+              "ToolTip": "E:\\DAVID\\Sistemadecontrolparqueo\\Views\\Vehiculo\\Historial.cshtml",
+              "RelativeToolTip": "Views\\Vehiculo\\Historial.cshtml",
+              "ViewState": "AgIAADkAAAAAAAAAAAAkwF0AAAAxAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-11-21T13:47:04.202Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "site.css",
+              "DocumentMoniker": "E:\\DAVID\\Sistemadecontrolparqueo\\wwwroot\\css\\site.css",
+              "RelativeDocumentMoniker": "wwwroot\\css\\site.css",
+              "ToolTip": "E:\\DAVID\\Sistemadecontrolparqueo\\wwwroot\\css\\site.css",
+              "RelativeToolTip": "wwwroot\\css\\site.css",
+              "ViewState": "AgIAAC4AAAAAAAAAAAAuwFoAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
+              "WhenOpened": "2025-11-21T13:42:35.746Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "_ViewImports.cshtml",
+              "DocumentMoniker": "E:\\DAVID\\Sistemadecontrolparqueo\\Views\\_ViewImports.cshtml",
+              "RelativeDocumentMoniker": "Views\\_ViewImports.cshtml",
+              "ToolTip": "E:\\DAVID\\Sistemadecontrolparqueo\\Views\\_ViewImports.cshtml",
+              "RelativeToolTip": "Views\\_ViewImports.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-11-21T13:42:04.273Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "_Layout.cshtml",
+              "DocumentMoniker": "E:\\DAVID\\Sistemadecontrolparqueo\\Views\\Shared\\_Layout.cshtml",
+              "RelativeDocumentMoniker": "Views\\Shared\\_Layout.cshtml",
+              "ToolTip": "E:\\DAVID\\Sistemadecontrolparqueo\\Views\\Shared\\_Layout.cshtml",
+              "RelativeToolTip": "Views\\Shared\\_Layout.cshtml",
+              "ViewState": "AgIAABMAAAAAAAAAAAAkwDgAAAANAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-11-21T13:41:44.758Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "_ViewStart.cshtml",
+              "DocumentMoniker": "E:\\DAVID\\Sistemadecontrolparqueo\\Views\\_ViewStart.cshtml",
+              "RelativeDocumentMoniker": "Views\\_ViewStart.cshtml",
+              "ToolTip": "E:\\DAVID\\Sistemadecontrolparqueo\\Views\\_ViewStart.cshtml",
+              "RelativeToolTip": "Views\\_ViewStart.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-11-21T13:41:33.906Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "Salida.cshtml",
+              "DocumentMoniker": "E:\\DAVID\\Sistemadecontrolparqueo\\Views\\Vehiculo\\Salida.cshtml",
+              "RelativeDocumentMoniker": "Views\\Vehiculo\\Salida.cshtml",
+              "ToolTip": "E:\\DAVID\\Sistemadecontrolparqueo\\Views\\Vehiculo\\Salida.cshtml",
+              "RelativeToolTip": "Views\\Vehiculo\\Salida.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACAAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-11-21T13:41:10.612Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "Entrada.cshtml",
+              "DocumentMoniker": "E:\\DAVID\\Sistemadecontrolparqueo\\Views\\Vehiculo\\Entrada.cshtml",
+              "RelativeDocumentMoniker": "Views\\Vehiculo\\Entrada.cshtml",
+              "ToolTip": "E:\\DAVID\\Sistemadecontrolparqueo\\Views\\Vehiculo\\Entrada.cshtml",
+              "RelativeToolTip": "Views\\Vehiculo\\Entrada.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACAAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-11-21T13:40:52.393Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "E:\\DAVID\\Sistemadecontrolparqueo\\Views\\Vehiculo\\Index.cshtml",
+              "RelativeDocumentMoniker": "Views\\Vehiculo\\Index.cshtml",
+              "ToolTip": "E:\\DAVID\\Sistemadecontrolparqueo\\Views\\Vehiculo\\Index.cshtml",
+              "RelativeToolTip": "Views\\Vehiculo\\Index.cshtml",
+              "ViewState": "AgIAAFcAAAAAAAAAAAAkwIMAAAAGAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-11-21T13:40:34.446Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "E:\\DAVID\\Sistemadecontrolparqueo\\appsettings.json",
+              "RelativeDocumentMoniker": "appsettings.json",
+              "ToolTip": "E:\\DAVID\\Sistemadecontrolparqueo\\appsettings.json",
+              "RelativeToolTip": "appsettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-11-21T13:37:43.325Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "Program.cs",
+              "DocumentMoniker": "E:\\DAVID\\Sistemadecontrolparqueo\\Program.cs",
+              "RelativeDocumentMoniker": "Program.cs",
+              "ToolTip": "E:\\DAVID\\Sistemadecontrolparqueo\\Program.cs",
+              "RelativeToolTip": "Program.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACEAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-21T13:37:32.608Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "VehiculoController.cs",
+              "DocumentMoniker": "E:\\DAVID\\Sistemadecontrolparqueo\\Controllers\\VehiculoController.cs",
+              "RelativeDocumentMoniker": "Controllers\\VehiculoController.cs",
+              "ToolTip": "E:\\DAVID\\Sistemadecontrolparqueo\\Controllers\\VehiculoController.cs",
+              "RelativeToolTip": "Controllers\\VehiculoController.cs",
+              "ViewState": "AgIAADoAAAAAAAAAAAAqwGYAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-21T13:37:20.396Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "ParqueoContext.cs",
+              "DocumentMoniker": "E:\\DAVID\\Sistemadecontrolparqueo\\Data\\ParqueoContext.cs",
+              "RelativeDocumentMoniker": "Data\\ParqueoContext.cs",
+              "ToolTip": "E:\\DAVID\\Sistemadecontrolparqueo\\Data\\ParqueoContext.cs",
+              "RelativeToolTip": "Data\\ParqueoContext.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-21T13:36:53.519Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "Vehiculo.cs",
+              "DocumentMoniker": "E:\\DAVID\\Sistemadecontrolparqueo\\Models\\Vehiculo.cs",
+              "RelativeDocumentMoniker": "Models\\Vehiculo.cs",
+              "ToolTip": "E:\\DAVID\\Sistemadecontrolparqueo\\Models\\Vehiculo.cs",
+              "RelativeToolTip": "Models\\Vehiculo.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABYAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-21T13:36:20.231Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "Sistemadecontrolparqueo",
+              "DocumentMoniker": "E:\\DAVID\\Sistemadecontrolparqueo\\Sistemadecontrolparqueo.csproj",
+              "RelativeDocumentMoniker": "Sistemadecontrolparqueo.csproj",
+              "ToolTip": "E:\\DAVID\\Sistemadecontrolparqueo\\Sistemadecontrolparqueo.csproj",
+              "RelativeToolTip": "Sistemadecontrolparqueo.csproj",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAAKAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2025-11-21T13:35:55.602Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

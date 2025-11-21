@@ -1,0 +1,132 @@
+﻿@model List<Sistemadecontrolparqueo.Models.Vehiculo>
+
+@{
+    ViewData["Title"] = "Estado del Parqueo";
+}
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h2>🚗 Estado del Parqueo</h2>
+    <div>
+        <a asp-action="Entrada" class="btn btn-success me-2">➕ Registrar Entrada</a>
+        <a asp-action="Historial" class="btn btn-info">📋 Ver Historial</a>
+    </div>
+</div>
+
+@if (TempData["Recompensa"] != null)
+{
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <i class="fas fa-gift me-2"></i>
+        @TempData["Recompensa"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    </div>
+}
+
+@if (TempData["Mensaje"] != null)
+{
+    <div class="alert alert-info alert-dismissible fade show" role="alert">
+        <i class="fas fa-info-circle me-2"></i>
+        @TempData["Mensaje"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    </div>
+}
+
+<div class="row mb-4">
+    <div class="col-md-3">
+        <div class="card bg-success text-white">
+            <div class="card-body">
+                <h5>En Parqueo</h5>
+                <h3>@Model.Count(v => v.Estado == "Dentro del Parqueo")</h3>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card bg-danger text-white">
+            <div class="card-body">
+                <h5>Fuera del Parqueo</h5>
+                <h3>@Model.Count(v => v.Estado == "Fuera del Parqueo")</h3>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card bg-warning text-dark">
+            <div class="card-body">
+                <h5>Recompensas Hoy</h5>
+                <h3>@Model.Count(v => v.RecompensaEntregada && v.FechaSalida?.Date == DateTime.Today)</h3>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card bg-primary text-white">
+            <div class="card-body">
+                <h5>Total Vehículos</h5>
+                <h3>@Model.Count</h3>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="card">
+    <div class="card-header">
+        <h5>📋 Lista de Vehículos</h5>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-hover">
+                <thead class="table-light">
+                    <tr>
+                        <th>Placa</th>
+                        <th>Entrada</th>
+                        <th>Salida</th>
+                        <th>Estado</th>
+                        <th>Tiempo (h)</th>
+                        <th>Recompensa</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr class="@(item.Estado == "Dentro del Parqueo" ? "table-warning" : "")">
+                            <td><strong>@item.Placa</strong></td>
+                            <td>@item.FechaEntrada.ToString("HH:mm dd/MM/yyyy")</td>
+                            <td>@(item.FechaSalida?.ToString("HH:mm dd/MM/yyyy") ?? "N/A")</td>
+                            <td>
+                                <span class="badge @(item.Estado == "Dentro del Parqueo" ? "bg-warning text-dark" : "bg-success")">
+                                    @item.Estado
+                                </span>
+                            </td>
+                            <td>
+                                @if (item.FechaSalida.HasValue)
+                                {
+                                    var tiempo = item.FechaSalida.Value - item.FechaEntrada;
+                                    var horas = (int)tiempo.TotalHours;
+                                    var minutos = (int)(tiempo.TotalMinutes % 60);
+                                    @($"{horas}h {minutos}m")
+                                }
+                                else
+                                {
+                                    <span class="text-muted">N/A</span>
+                                }
+                            </td>
+                            <td>
+                                @(item.RecompensaEntregada ? "🎁" : "❌")
+                            </td>
+                            <td>
+                                @if (item.Estado == "Dentro del Parqueo")
+                                {
+                                    <a asp-action="Salida" asp-route-placa="@item.Placa" class="btn btn-danger btn-sm">
+                                        <i class="fas fa-sign-out-alt"></i> Salida
+                                    </a>
+                                }
+                                else
+                                {
+                                    <span class="text-muted">✅</span>
+                                }
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

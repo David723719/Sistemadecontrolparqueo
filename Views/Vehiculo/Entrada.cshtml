@@ -1,0 +1,33 @@
+﻿@model Sistemadecontrolparqueo.Models.Vehiculo
+
+@{
+    ViewData["Title"] = "Registrar Entrada";
+}
+
+<h2>➕ Registrar Entrada de Vehículo</h2>
+
+<hr />
+<div class="row">
+    <div class="col-md-6">
+        <form asp-action="Entrada">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Placa" class="control-label">Placa del Vehículo</label>
+                <input asp-for="Placa" class="form-control" placeholder="Ej: 1891ZLD" maxlength="10" />
+                <span asp-validation-for="Placa" class="text-danger"></span>
+                <small class="form-text text-muted">Ingrese la placa sin espacios ni caracteres especiales</small>
+            </div>
+            <br />
+            <div class="form-group">
+                <input type="submit" value="Registrar Entrada" class="btn btn-success" />
+                <a asp-action="Index" class="btn btn-secondary">Volver a la Lista</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

@@ -1,0 +1,102 @@
+﻿@model List<Sistemadecontrolparqueo.Models.Vehiculo>
+
+@{
+    ViewData["Title"] = "Historial de Entradas y Salidas";
+}
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h2>📋 Historial de Entradas y Salidas</h2>
+    <a asp-action="Index" class="btn btn-primary">Volver al Parqueo</a>
+</div>
+
+<div class="card">
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-hover">
+                <thead class="table-dark">
+                    <tr>
+                        <th>Placa</th>
+                        <th>Entrada</th>
+                        <th>Salida</th>
+                        <th>Estado</th>
+                        <th>Tiempo (h)</th>
+                        <th>Recompensa</th>
+                        <th>Acción</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr class="@(item.Estado == "Dentro del Parqueo" ? "table-warning" : "table-light")">
+                            <td><strong>@item.Placa</strong></td>
+                            <td>@item.FechaEntrada.ToString("yyyy-MM-dd HH:mm")</td>
+                            <td>
+                                @(item.FechaSalida?.ToString("yyyy-MM-dd HH:mm") ??
+                                                            (item.Estado == "Dentro del Parqueo" ? "Aún en parqueo" : "N/A"))
+                        </td>
+                        <td>
+                            <span class="badge @(item.Estado == "Dentro del Parqueo" ? "bg-warning text-dark" : "bg-success")">
+                                @item.Estado
+                            </span>
+                        </td>
+                        <td>
+                            @(item.TiempoParqueado?.ToString() ?? "N/A")
+                        </td>
+                        <td>
+                            @(item.RecompensaEntregada ? "🎁 Entregada" : "❌ Pendiente")
+                        </td>
+                        <td>
+                            @if (item.Estado == "Dentro del Parqueo")
+                                {
+                                    <a asp-action="Salida" asp-route-placa="@item.Placa" class="btn btn-danger btn-sm">Registrar Salida</a>
+                                }
+                                else
+                                {
+                                    <span class="text-muted">Completado</span>
+                                }
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<div class="mt-4">
+    <h4>📊 Estadísticas Generales</h4>
+    <div class="row">
+        <div class="col-md-3">
+            <div class="card bg-primary text-white">
+                <div class="card-body">
+                    <h5>Total Vehículos</h5>
+                    <h3>@Model.Count</h3>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card bg-warning text-dark">
+                <div class="card-body">
+                    <h5>En Parqueo</h5>
+                    <h3>@Model.Count(v => v.Estado == "Dentro del Parqueo")</h3>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card bg-success text-white">
+                <div class="card-body">
+                    <h5>Salidas Registradas</h5>
+                    <h3>@Model.Count(v => v.Estado == "Fuera del Parqueo")</h3>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card bg-info text-white">
+                <div class="card-body">
+                    <h5>Recompensas Entregadas</h5>
+                    <h3>@Model.Count(v => v.RecompensaEntregada)</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

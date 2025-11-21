@@ -1,0 +1,33 @@
+﻿@model Sistemadecontrolparqueo.Models.Vehiculo
+
+@{
+    ViewData["Title"] = "Registrar Salida";
+}
+
+<h2>🚪 Registrar Salida - @Model.Placa</h2>
+
+<div class="alert alert-info">
+    <h4>Detalles del Vehículo</h4>
+    <p><strong>Placa:</strong> @Model.Placa</p>
+    <p><strong>Entrada:</strong> @Model.FechaEntrada.ToString("yyyy-MM-dd HH:mm")</p>
+    <p><strong>Estado:</strong> <span class="badge bg-warning text-dark">@Model.Estado</span></p>
+</div>
+
+<div class="alert alert-warning">
+    <i class="fas fa-exclamation-triangle me-2"></i>
+    <strong>Atención:</strong> Al confirmar la salida, se calculará el tiempo parqueado y se verificará si merece recompensa.
+</div>
+
+<form asp-action="Salida" method="post">
+    <input type="hidden" asp-for="Id" />
+    <div class="form-group">
+        <input type="submit" value="Confirmar Salida" class="btn btn-danger btn-lg" />
+        <a asp-action="Index" class="btn btn-secondary">Volver a la Lista</a>
+    </div>
+</form>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
