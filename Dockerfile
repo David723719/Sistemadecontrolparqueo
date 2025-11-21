@@ -4,7 +4,9 @@ WORKDIR /src
 
 # Copiar solución y .csproj para restore eficiente
 COPY *.sln .
-COPY Sistemadecontrolparqueo/*.csproj ./Sistemadecontrolparqueo/
+COPY Sistemadecontrolparqueo.csproj .
+
+# Restaurar dependencias
 RUN dotnet restore
 
 # Copiar todo el código fuente
@@ -14,7 +16,7 @@ COPY . .
 WORKDIR /src/Sistemadecontrolparqueo
 RUN dotnet publish -c Release -o /app/publish --no-restore
 
-# Etapa de ejecución (más ligera)
+# Etapa final (más ligera)
 FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS final
 WORKDIR /app
 COPY --from=build /app/publish .
